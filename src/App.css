@@ -27,7 +27,22 @@
 .App-link {
   color: #61dafb;
 }
-
+.navBar {
+  width: 100%;
+  padding-right:60%;
+}
+.navItem {
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  margin-top: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

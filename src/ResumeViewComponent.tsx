@@ -1,28 +1,30 @@
 import React from 'react';
-import {Container, Row, Col} from 'shards-react'
+import {Card, Container, Row, Col} from 'shards-react'
 import ResumeItemCard from "./ResumeItemCard";
 import ResumeItem from "./models/ResumeItem";
 interface ResumeViewComponentProps {
-    page: string;
+    resumeItems: Array<any>;
 }
 
 const ResumeViewComponent = (props: ResumeViewComponentProps) => {
-    let resumeItems = []
-    let getResumeItems = () => {
-    //    get requests
-
-    }
+    console.log(props.resumeItems)
+    let testArray:Array<ResumeItem> = [ {
+        title: 'hel',
+        short_desc: 'lo',
+        long_desc: 'world',
+        semester: 'test',
+        year: 2020,
+        image: 'https://www.example.com/test.jpg'
+    }]
     return (
         <Container>
-            { resumeItems.map((resumeItem) => {
-                return (
-                    <Row>
-                        <ResumeItemCard resumeItem = {resumeItem}></ResumeItemCard>
-                    </Row>
+            {
+                testArray.map((resumeItem:ResumeItem) =>
+                    <ResumeItemCard resumeItem={resumeItem}/>
                 )
-                })
             }
         </Container>
+
     )
 }
 export default ResumeViewComponent
