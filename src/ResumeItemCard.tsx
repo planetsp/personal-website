@@ -1,5 +1,7 @@
 import React from 'react';
 import ResumeItem from "./models/ResumeItem";
+import './ResumeItemCard.css';
+
 import {
     Badge,
     Card,
@@ -12,35 +14,41 @@ import {
 } from 'shards-react';
 
 interface ResumeItemCardProps {
-    resumeItem: ResumeItem;
+    title: string;
+    short_desc: string
+    long_desc: string;
+    year: number;
+    tags?: Array<string>;
+    image?: string;
+    semester: string;
 }
 const ResumeItemCard = (props: ResumeItemCardProps) => {
     return (
-        <Card>
+        <Card className={"resumeItemCard"}>
             <CardHeader>
-                { props.resumeItem.title }
+                { props.title }
             </CardHeader>
-            <CardTitle>
-                { props.resumeItem.short_desc }
-            </CardTitle>
-            <CardImg>
-                { props.resumeItem.image }
+            <CardImg src={props.image} className={"resumeItemCardImage"}>
             </CardImg>
+            <CardTitle className={"resumeItemCardTitle"}>
+                { props.short_desc }
+            </CardTitle>
+
             <CardBody>
-                { props.resumeItem.semester } { props.resumeItem.year }
+                { props.semester } { props.year }
             </CardBody>
 
-            <Button>
+            <Button className={"resumeItemCardButton"}>
                 Read More ->
             </Button>
 
             <CardFooter>
-                { props.resumeItem.tags? props.resumeItem.tags.map((tag:string) =>{
+                { props.tags? props.tags.forEach((tag:string) =>{
                             return (
                                 <Badge>{{tag}}</Badge>
                             )
                         }
-                    ) : {} }
+                    ) : <div></div> }
             </CardFooter>
         </Card>
     )

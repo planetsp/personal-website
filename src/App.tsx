@@ -33,9 +33,21 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 Firebase.initializeApp(config);
-
-
+const getCollection = ( path: string) => {
+  let database = Firebase.firestore();
+  let itemArray:Array<ResumeItem> = [];
+  database.collection(path).onSnapshot(snapshot => {
+    snapshot.docs.map(doc => {
+      let resumeItem = doc.data() as ResumeItem
+      itemArray.push(resumeItem);
+    })
+  });
+  return itemArray;
+}
+let philosophyItems: Array<ResumeItem> = getCollection('/philosophy');
+let computerScienceItems: Array<ResumeItem> = getCollection('/computer_science');
 function App() {
+  console.log(philosophyItems, philosophyItems.length)
   return (
     <div >
       <Router>
@@ -49,10 +61,10 @@ function App() {
         </Nav>
         <Switch>
           <Route path="/philosophy">
-            <ResumeViewComponent resumeItems={getCollection('/philosophy') || ["hello"]} />
+            <ResumeViewComponent path={'philosophy'} />
           </Route>
           <Route path="/computer_science">
-            <ResumeViewComponent resumeItems={getCollection('/computer_science')}/>
+            <ResumeViewComponent path={'computer_science'}/>
           </Route>
           <Route path="/contact">
             <ContactComponent />
@@ -81,15 +93,5 @@ function App() {
   );
 }
 
-const getCollection = ( path: string) => {
-  let database = Firebase.firestore();
-  let itemArray:Array<ResumeItem> = [];
-  database.collection(path).onSnapshot(snapshot => {
-    snapshot.docs.map(doc => {
-      let resumeItem = doc.data() as ResumeItem
-      itemArray.push(resumeItem);
-    })
-  });
-  return itemArray;
-}
+
 export default App;
