@@ -1,5 +1,11 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
+  background-color: #F8F4E3;
+  min-height: 800px;
+  height: 100%;
+  margin: 0;
+  padding-bottom: 10%;
+
 }
 
 .App-logo {
@@ -29,7 +35,11 @@
 }
 .navBar {
   width: 100%;
+  background-color: #0B4F6C;
   /*padding-right:60%;*/
+}
+.navLink {
+  color: whitesmoke;
 }
 .navItem {
   color: whitesmoke;
@@ -40,8 +50,13 @@
 }
 .card {
   margin-top: 10px;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  min-height: 600px;
+}
+.cardImage {
+  max-width: 500px;
+  height: auto;
 }
 @keyframes App-logo-spin {
   from {

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button, Card,CardBody, CardHeader, ListGroup, ListGroupItem } from 'shards-react'
+import './App.css';
+
 const ContactComponent = () => {
     return (
-        <Card>
+        <Card className={'card'}>
             <CardHeader>
                 Contact
             </CardHeader>
@@ -11,11 +13,20 @@ const ContactComponent = () => {
 
                 <ListGroup>
                     <ListGroupItem>Email:
-                        <Button>Click to reveal</Button>
+                        <a href={"/"}> See resume</a>
                     </ListGroupItem>
-                    <ListGroupItem>Github</ListGroupItem>
-                    <ListGroupItem>Twitter</ListGroupItem>
-                    <ListGroupItem>LinkedIn: Connect with me</ListGroupItem>
+                    <br/>
+                    <ListGroupItem> Github:
+                        <a href={"https://github.com/planetsp"}> planetsp</a>
+                    </ListGroupItem>
+                    <br/>
+                    <ListGroupItem> Twitter:
+                        <a href={"https://twitter.com/kusi_kevin"}> @kusi_kevin</a>
+                    </ListGroupItem>
+                    <br/>
+                    <ListGroupItem> LinkedIn:
+                        <a href={"https://www.linkedin.com/in/kevin-kusi-b90355164/"}> Connect with me</a>
+                    </ListGroupItem>
                 </ListGroup>
             </CardBody>
 
