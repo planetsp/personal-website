@@ -85,9 +85,9 @@ function App() {
                 <br></br>
                 Feel free to browse around! Though keep in mind... this website is under construction... I'm trying get a better grasp of using <a href={"https://reactjs.org/"}>React</a> with <a href={"https://www.typescriptlang.org/"}>TypeScript</a>.
                 <br/><br/>
-                You can download my resume (though this website functions as a sort of resume) as a PDF below:</p>
+                You can download my computer science oriented resume (though this website functions as a sort of resume) as a PDF below:</p>
                 <Button color={'#FFFFFF'}>
-                  <a className={"navLink"} href={"https://firebasestorage.googleapis.com/v0/b/personal-website-267321.appspot.com/o/Kevin%20Kusi%20resume%20CS.pdf?alt=media&token=03d27ceb-d566-4fdb-82e5-bb30fbea57bb"}>Download my resume ↓</a>
+                  <a className={"navLink"} href={"https://firebasestorage.googleapis.com/v0/b/personal-website-267321.appspot.com/o/Kevin%20Kusi%20Resume%202020.pdf?alt=media&token=3194dfc7-35e8-4920-bbb6-16536c979a07"}>Download my resume ↓</a>
                   </Button>
               </CardBody>
             </Card>
