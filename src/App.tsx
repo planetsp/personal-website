@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
 
@@ -11,7 +10,6 @@ import {
   CardImg,
   Navbar,
   Nav,
-  NavItem,
   NavLink
 } from "shards-react";
 import {
@@ -22,8 +20,8 @@ import {
 import './App.css';
 import ResumeViewComponent from "./ResumeViewComponent";
 import ContactComponent from "./ContactComponent";
-import Firebase from "firebase";
-import ResumeItem from "./models/ResumeItem";
+import * as Firebase from "firebase/app"
+
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -32,22 +30,9 @@ const config = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
-Firebase.initializeApp(config);
-const getCollection = ( path: string) => {
-  let database = Firebase.firestore();
-  let itemArray:Array<ResumeItem> = [];
-  database.collection(path).onSnapshot(snapshot => {
-    snapshot.docs.map(doc => {
-      let resumeItem = doc.data() as ResumeItem
-      itemArray.push(resumeItem);
-    })
-  });
-  return itemArray;
-}
-let philosophyItems: Array<ResumeItem> = getCollection('/philosophy');
-let computerScienceItems: Array<ResumeItem> = getCollection('/computer_science');
+const app = Firebase.initializeApp(config);
+
 function App() {
-  console.log(philosophyItems, philosophyItems.length)
   return (
     <div className={'App'}>
       <Router>
@@ -61,10 +46,10 @@ function App() {
         </Nav>
         <Switch>
           <Route path="/philosophy">
-            <ResumeViewComponent path={'philosophy'} />
+            <ResumeViewComponent path={'/philosophy'} app={app} />
           </Route>
           <Route path="/computer_science">
-            <ResumeViewComponent path={'computer_science'}/>
+            <ResumeViewComponent path={'/computer_science'} app={app}/>
           </Route>
           <Route path="/contact">
             <ContactComponent />
@@ -83,11 +68,11 @@ function App() {
                 <br/><br/>
                 The purpose of this website is to give a more in-depth look at my academic and professional history in both philosophy and computer science, without having to abstract away details (as in the case of a resume). 
                 <br></br>
-                Feel free to browse around! Though keep in mind... this website is under construction... I'm trying get a better grasp of using <a href={"https://reactjs.org/"}>React</a> with <a href={"https://www.typescriptlang.org/"}>TypeScript</a>.
+                Feel free to browse around! This website was built using <a href={"https://reactjs.org/"}>React</a> with <a href={"https://www.typescriptlang.org/"}>TypeScript</a>.
                 <br/><br/>
                 You can download my computer science oriented resume (though this website functions as a sort of resume) as a PDF below:</p>
                 <Button color={'#FFFFFF'}>
-                  <a className={"navLink"} href={"https://firebasestorage.googleapis.com/v0/b/personal-website-267321.appspot.com/o/Kevin%20Kusi%20Resume%202020.pdf?alt=media&token=3194dfc7-35e8-4920-bbb6-16536c979a07"}>Download my resume ↓</a>
+                  <a className={"navLink"} href={"https://drive.google.com/file/d/1cRwF-vHeNNmep_TFYMx_69eBFueK4zNX/view?usp=sharing"}>Download my resume ↓</a>
                   </Button>
               </CardBody>
             </Card>

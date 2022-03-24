@@ -1,13 +1,14 @@
 import React from 'react';
-import {Form, FormSelect, Container, Row, Col} from 'shards-react'
+import {Form, Container, Row, Col} from 'shards-react'
 import ResumeItemCard from "./ResumeItemCard";
 import ResumeItem from "./models/ResumeItem";
 import './ResumeViewComponent.css'
-import Firebase from "firebase";
-import ClipLoader from "react-spinners/ClipLoader";
 import {ScaleLoader} from "react-spinners";
+import { FirebaseApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, query } from 'firebase/firestore';
 
 interface ResumeViewComponentProps {
+    app: FirebaseApp;
     path: string;
 }
 interface ResumeViewComponentState {
@@ -22,7 +23,7 @@ class ResumeViewComponent extends React.Component<ResumeViewComponentProps, Resu
             resumeItems: [],
             filteredResumeItems: [],
         }
-        this.getCollection(this.props.path)
+        this.getCollection(this.props.app, this.props.path)
     }
     filterResumeItems() {
 
@@ -30,31 +31,31 @@ class ResumeViewComponent extends React.Component<ResumeViewComponentProps, Resu
     sortResumeItems(){
 
     }
-    getCollection ( path: string) {
-        let database = Firebase.firestore();
-        let itemArray:Array<ResumeItem> = [];
-        database.collection(path).onSnapshot(snapshot => {
-            snapshot.docs.map(doc => {
-                let resumeItem = doc.data() as ResumeItem
-                this.setState(state => {
-                    const resumeItems = [...state.resumeItems, resumeItem];
-                    return {
-                        resumeItems,
-                    }
-                    }
+    async getCollection ( app: FirebaseApp, path: string) {
+        const db = getFirestore(app);
 
-                )
-            })
+        let itemArray:Array<ResumeItem> = [];
+        const q = query(collection(db, path));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+          let resumeItem = doc.data() as ResumeItem
+            this.setState(state => {
+                const resumeItems = [...state.resumeItems, resumeItem];
+                return {
+                    resumeItems,
+                }
+                }
+
+            )
         });
+
         return itemArray;
     }
     render() {
-        // console.log(this.state.resumeItems)
         return (
             <div>
-            <Form>
-
-            </Form>
             <Container className={'rowContainer'}>
                 <Row noGutters={true} className={'rowContainer'}>
                     {

@@ -15,15 +15,13 @@ const ContactComponent = () => {
                     <ListGroupItem>Email:
                         <a href={"/"}> See resume</a>
                     </ListGroupItem>
-                    <br/>
+                    <hr className='dashed'/>
                     <ListGroupItem> Github:
                         <a href={"https://github.com/planetsp"}> planetsp</a>
                     </ListGroupItem>
-                    <br/>
                     <ListGroupItem> Twitter:
                         <a href={"https://twitter.com/kusi_kevin"}> @kusi_kevin</a>
                     </ListGroupItem>
-                    <br/>
                     <ListGroupItem> LinkedIn:
                         <a href={"https://www.linkedin.com/in/kevin-kusi-b90355164/"}> Connect with me</a>
                     </ListGroupItem>
